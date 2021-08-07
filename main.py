@@ -75,7 +75,7 @@ class Items:
         self.potion_making = {'recipe': {
             'potion of distractions': '1- add three cut pieces of nimble wool 2- set the temp to 350 degress 3-add dark zinc 4- stir the potion clockwise three times 5-crush the exhausted copper and add it to the potion. 6- change the temp to 230 degrees 7- let it sit for 2 hours.',
             'potion of immobilizing': '1- add dark zinc 2- temp the solution up to 200 degrees 3- stir the solution 5 times counterclockwise 4-add cut pieces of pheonix lace. 5- add half dust 6- let the potion sit for 1 hours.',
-            'tonic of empowerment': '1- add cut pieces of warped_nickel to the couldern. 2- turn up the temp to 275 degrees 3- add abyssmarble. 4- stir the solution clockwise 4 times. 5- let the solution sit for 1 hour. 6- add cut pieces of nimble wool to the solution. 7- add exhausted copper 8- stir the solution 2 times counterclockwise and then once clockwise.'
+            'tonic of empowerment': '1- add cut pieces of warped_nickel to the cauldron. 2- turn up the temp to 275 degrees 3- add abyssmarble. 4- stir the solution clockwise 4 times. 5- let the solution sit for 1 hour. 6- add cut pieces of nimble wool to the solution. 7- add exhausted copper 8- stir the solution 2 times counterclockwise and then once clockwise.'
         }, 'correct steps': {
             'potion of distractions': ['cut nimble wool', 'add cutted nimble wool', 'set temp to 350', 'add dark zinc',
                                        'stir 3 clockwise', 'crush exhausted copper', 'add crushed exhausted copper',
@@ -190,7 +190,7 @@ class Items:
             while redo:
                 player1.potion_attempts += 1
                 print(
-                    f'Potion being made: {build_potion}\nYou took an empty coulderan and wooden stirring spoon from the cupboard and set it on the table. Now start adding ingredients to the cauldron in the order dictated below. You will also have to change the temperature, slice ingredients at the right time, and stir the solution in order to successfully make this potion so stay attentive!')
+                    f'Potion being made: {build_potion}\nYou took an empty cauldron and wooden stirring spoon from the cupboard and set it on the table. Now start adding ingredients to the cauldron in the order dictated below. You will also have to change the temperature, slice ingredients at the right time, and stir the solution in order to successfully make this potion so stay attentive!')
                 print(
                     "use the keyword 'add <ingredient>' to add an ingredient to your cauldron. Use 'cut <ingredient>' or 'crush <ingredient>' to split up an ingredient "
                     "in a certain manner before adding it to the couldern. Use 'set temp to <temperature>' to change the temperature of the potion. Uset 'wait <time> to "
@@ -387,7 +387,6 @@ class Items:
         redo = True
         while redo:
             spells_tries += 1
-            # if all(x in player1.items_used for x in ['Sorcery Introduction book','Sorcery Intermediate book']) and player1.items_used.count('training dummies') == 2:
             print(
                 "Now that you have learned the basics of sorcery, witch Nunnez has come to personally give you some advice as you prepare to go up against the Great Lord's army")
             print(
@@ -416,10 +415,6 @@ class Items:
 
 
 class Player:
-    # special_abilities are randomized abilites predetermined for the player. Strength is defualted to 0 and health is defaulted to 100.
-    # Inventory is a list of all the items the player has collected for their own use.
-    #'primal bone', 'stained log', 'aquatweed', 'dark zinc', 'phoenix lace', 'half dust',
-                          #'warped nickel', 'nimble wool', 'abyssmarble', 'exhausted copper'
     def __init__(self, name, inventory=[], health=100, strength=0, knowledge=0):
         self.name = name
         self.health = health
@@ -431,7 +426,6 @@ class Player:
         self.potions_made = []
         self.potion_attempts = 0
 
-    # add item to inventory
     def calibrate(self):
         global game_is_on
         spells_tries = 1
@@ -442,19 +436,17 @@ class Player:
         print(f'Number of tries taken for potions quiz: {potion_tries}')
         if self.knowledge > 300 and self.strength > 350 and spells_tries <= 3 and potion_tries <= 3 and self.potion_attempts <= 6:
             print(
-                'You have acquired a sufficient amount of knowledge and strength to be a true sorcerer. Congratulations, you win!')
+                'You have acquired a sufficient amount of knowledge and strength to be a true sorcerer. You are ready to face villians like the Great lord and 
+                'bring peace to the magical world. Congratulations, you win!')
         else:
             print(
-                'Sorry, you were unable to acquire a sufficient amount of knowledge and strength to win this game. You lose.')
+                'Sorry, you were unable to acquire a sufficient amount of knowledge and strength to become a sorcerer. You are not ready to face the 
+                'likes of evil wizards like the Great lord. Sorry, you lose.')
         game_is_on = False
         return
 
 
 player1 = Player('Amy')
-
-
-# the user is presented with detailed descriptions of the rooms and what they can do next. They also get information on the items
-# avaliable in the vicinity and routes that are avaliable to them.
 
 class Room:
     global current_room
@@ -465,7 +457,6 @@ class Room:
         self.items = items
         self.routes = routes
 
-    # pick up items to add to inventory
     def pick(self, item):
         if item not in current_room.items:
             print('invalid input')
@@ -477,7 +468,6 @@ class Room:
             player1.inventory.append(item.name)
             print(f'Current inventory: {player1.inventory}')
 
-    # the user can switch to rooms that are avaliable to them(like the library or home)
     def go_to(self, place):
         global current_room
         item_found = False
